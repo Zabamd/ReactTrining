@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import ExpenseForm from "./components/Expenses/ExpenseForm";
+import Expenses from "./components/Expenses/Expenses";
 
-function App() {
+const example = [
+  { itemName: "Water", itemPrice: "18.99", date: "2048-10-02" },
+  { itemName: "Water", itemPrice: "18.99", date: "2048-10-02" },
+  { itemName: "Water", itemPrice: "18.99", date: "2048-10-02" },
+];
+
+const App = () => {
+  
+  const [data, setData] = useState(example);
+
+  const onExpenseSubmit = (enteredExpense) => {
+    const expenseData = {
+      ...enteredExpense
+    };
+    setData((prevData) => {
+      prevData.push(expenseData);
+      return prevData;
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ExpenseForm onExpenseSubmit={onExpenseSubmit} />
+      <Expenses expenses={data} />
     </div>
   );
-}
-
+};
 export default App;

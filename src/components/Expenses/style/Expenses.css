@@ -1,0 +1,4 @@
+.expensesWrapper {
+    display:flex;
+    flex-direction: row;
+}
